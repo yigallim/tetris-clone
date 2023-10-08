@@ -2,7 +2,7 @@
 
 A simple modern tetris game website clone. Made it for fun but also improves my javascript skill and programming concept. This project is not a complete and playable game.
 
-Access through 
+Access through https://yigallim.github.io/tetris-clone/
 Or use "Go Live" extension in VSCODE, and open the index.html.
 
 The game "will" be updated someday in the future, maybe :) . 
