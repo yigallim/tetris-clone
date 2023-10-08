@@ -2,9 +2,10 @@
 
 A simple modern tetris game website clone. Made it for fun but also improves my javascript skill and programming concept. This project is not a complete and playable game.
 
-Use Go Live Extension in VSCODE, and open the index.html.
+Access through 
+Or use "Go Live" extension in VSCODE, and open the index.html.
 
-The game "will" be updated someday, maybe :) . 
+The game "will" be updated someday in the future, maybe :) . 
 
 ## Controls
 LEFT       : A<br/>
