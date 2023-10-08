@@ -1,0 +1,214 @@
+@font-face {
+  src: url(assets/hun2.ttf);
+  font-family: HUN;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --ff-1 : HUN;
+  --ff-2 : 'Roboto', sans-serif;
+}
+
+body {
+  background-color: black;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  width: 100vw;
+  font-family: var(--ff-1);
+}
+
+.tetr {
+  position: fixed;
+  display: flex;
+  z-index: -1;
+}
+
+#bg-video {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  object-fit: cover;
+  z-index: -2;
+}
+
+#bg-darken {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: bg-darken 9s infinite;
+  transition: all 3s;
+  z-index: -2;
+}
+
+@keyframes bg-darken {
+  0%   {background-color: rgba(0, 0, 0, 0.65);}
+  50%  {background-color: rgba(0, 0, 0, 0.8);}
+  100% {background-color: rgba(0, 0, 0, 0.65);}
+}
+
+#board {
+  border-bottom: 3px solid rgb(180, 180, 180);
+  border-top: none;
+}
+
+.flex-row.fixed > div {
+  position: relative;
+  top: -1rem;
+}
+
+.board-container {
+  display: flex;
+  height: 838px;
+  width : 384px;
+}
+
+.board-line {
+  width: 3px;
+  height: 762px;
+  background-color: rgb(180, 180, 180);
+  position: relative;
+  top: 76px;
+}
+
+.look-over-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.hold-container .title {
+  text-align: right;
+  border-right: 2px rgb(180, 180, 180) solid;
+}
+
+.look-over-container .title{
+  border-left: 2px rgb(180, 180, 180) solid;
+}
+
+.hold-container canvas {
+  border: 2px rgb(180, 180, 180) solid;
+  border-top: none;
+  border-right: none;
+}
+
+.look-over-container canvas {
+  border-right: 2px rgb(180, 180, 180) solid;
+  padding-top: 1.5em;
+}
+
+.look-over-container canvas:last-child {
+  border-bottom: 2px rgb(180, 180, 180) solid;
+  padding-bottom: 1.5em;
+}
+
+.title {
+  color: white;
+  font-weight: 700;
+  font-size: 1.75rem;
+  letter-spacing: 0.15em;
+  border: 4.5px rgb(180, 180, 180) solid;
+  padding: 0.5rem 2rem;
+}
+
+#fps-bar {
+  font-family: var(--ff-2);
+  font-weight: 500;
+  color: white;
+  position: fixed;
+  top: 1rem;
+  left: 2rem;
+}
+
+/* /////////////////////////////////////////////// */
+/* animation */
+
+#animation .countdown {
+  font-family: var(--ff-1);
+  color: rgba(255, 201, 40, 0.9);
+  font-weight: 500;
+}
+
+#animation .countdown div { 
+  font-size: 6rem;
+}
+
+.hided-initial {
+  display: none;
+}
+
+.scale-out-center {
+  display: block;
+	animation: scale-out-center 600ms ease-in-out both;
+} 
+
+@keyframes scale-out-center {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+}
+
+/* /////////////////////////////////////////////// */
+/* config nav */
+
+#config-nav {
+  padding: 2rem 0.5rem;
+  position: fixed;
+  display: flex;
+  right: -25rem;
+  height: calc(100% - 2rem);
+  width: 25rem;
+  background-color: #000A;
+  transition: 0.2s ease-in-out;
+  color: white;
+  right: 0rem;
+}
+
+#config-nav > * {
+  opacity: 0;
+  transition: 0.1s ease-in-out;
+  opacity: 1;
+}
+
+#config-nav:hover {
+  right: 0rem;
+}
+
+#config-nav:hover#config-nav > * {
+  opacity: 1;
+}
+
+.config-level input[type="radio"] {
+  width: 1.2rem;
+  height: 1.2rem;
+  cursor: pointer;
+}
+
+.config-level input[type="number"] {
+  height: 1.5rem;
+  width: 10rem;
+  padding-left: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.config-level > div {
+  margin-top : 0.5rem;
+  font-size: 1.35rem;
+}
+
+.config-level>*:last-child {
+  margin-top: 1rem;
+}
+
+.config-level > h3 {
+  font-size: 2.5rem;
+}

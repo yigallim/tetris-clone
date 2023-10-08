@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tris</title>
+  <link rel="stylesheet" href="index.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <div id="bg-darken"></div>
+
+  <div class="tetr">
+    <div class="hold-container">
+      <div class="title">HOLD</div>
+      <canvas id="hold"></canvas>
+    </div>
+    <div class="board-container">
+      <div class="board-line bl1"></div>
+      <canvas id="board" height="836" width="380"></canvas>
+      <div class="board-line bl2"></div>
+    </div>
+    <div class="look-over-container">
+      <div class="title">NEXT</div>
+      <canvas id="look-over"></canvas>
+      <canvas id="look-over"></canvas>
+      <canvas id="look-over"></canvas>
+      <canvas id="look-over"></canvas>
+      <canvas id="look-over"></canvas>
+    </div>
+  </div>
+
+  <div id="animation">
+    <div class="countdown">
+      <div class="hided-initial">READY</div>
+      <div class="hided-initial">SET</div>
+      <div class="hided-initial">GO!</div>
+    </div>
+  </div>
+  
+  <div id="config-nav">
+    <div class="config-level">
+      <h3>LEVEL</h3>
+      <div><input type="radio" name="level" checked/> CLOSED</div>
+      <div><input type="radio" name="level"/> EASY</div>
+      <div><input type="radio" name="level"/> MEDIUM</div>
+      <div><input type="radio" name="level"/> HARD</div>
+      <div><input type="radio" name="level"/> IMPOSSIBLE</div>
+      <div>STATIC GRAVITY <input type="number"></div>
+    </div>
+  </div>
+  
+  <div id="fps-bar"></div>
+
+  <script src="js/initialize.js"></script>
+  <script src="js/index.js"></script>
+  <script src="js/addition.js"></script>
+  <script src="js/last.js"></script>
+</body>
+
+</html>
