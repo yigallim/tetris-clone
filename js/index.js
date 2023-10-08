@@ -460,7 +460,7 @@ const tetr = {
 
     setInterval(() => {
       this.control.softDrop();
-    }, 0);
+    }, 50);
 
     setInterval(() => {
       this.touchBottom();
