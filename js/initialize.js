@@ -29,3 +29,6 @@ const mino = new Image();
 const spriteLength = 256;
 const box = (256 - 16) / 5;
 mino.src = "assets/tetromino.png"
+
+document.body.style.transform = "scale(0.8)";
+document.body.style.transformOrigin = "40% 30%";
