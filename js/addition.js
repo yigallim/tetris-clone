@@ -3,19 +3,15 @@ const lookOver = document.querySelector(".look-over-container");
 const holdCanvas = hold.querySelector("canvas");
 const lOCanvas = lookOver.querySelectorAll("canvas");
 
-let barTopMargin = SQ * 2;
 
-hold.style.marginTop = barTopMargin.toString() + "px";
-lookOver.style.marginTop = barTopMargin.toString() + "px";
-
-holdCanvas.style.paddingTop = SQ + "px";
-holdCanvas.style.paddingBottom = SQ + "px";
-holdCanvas.height = 2 * SQ;
-holdCanvas.width = 6 * SQ;
+holdCanvas.style.paddingTop = blockSize + "px";
+holdCanvas.style.paddingBottom = blockSize + "px";
+holdCanvas.height = 2 * blockSize;
+holdCanvas.width = 6 * blockSize;
 
 for(let i = 0; i < lOCanvas.length; i++) {
-  lOCanvas[i].height = 2 * SQ;
-  lOCanvas[i].width = 6 * SQ;
+  lOCanvas[i].height = 2 * blockSize;
+  lOCanvas[i].width = 6 * blockSize;
 }
 
 let addition = {
@@ -36,26 +32,26 @@ let addition = {
 
       if(tetr.hasSprite) {
         if(ctx == holdCanvas.getContext("2d") && !tetr.firstHold) {
-          ctx.drawImage(mino, box * 2, box, box, box, data[0] * SQ, data[1] * SQ, SQ, SQ);
-          ctx.drawImage(mino, box * 2, box, box, box, data[2] * SQ, data[3] * SQ, SQ, SQ);
-          ctx.drawImage(mino, box * 2, box, box, box, data[4] * SQ, data[5] * SQ, SQ, SQ);
-          ctx.drawImage(mino, box * 2, box, box, box, data[6] * SQ, data[7] * SQ, SQ, SQ);
+          ctx.drawImage(mino, box * 2, box, box, box, data[0] * blockSize, data[1] * blockSize, blockSize, blockSize);
+          ctx.drawImage(mino, box * 2, box, box, box, data[2] * blockSize, data[3] * blockSize, blockSize, blockSize);
+          ctx.drawImage(mino, box * 2, box, box, box, data[4] * blockSize, data[5] * blockSize, blockSize, blockSize);
+          ctx.drawImage(mino, box * 2, box, box, box, data[6] * blockSize, data[7] * blockSize, blockSize, blockSize);
         }
         else {
-          ctx.drawImage(mino, tetr.sprite[sIndex], tetr.sprite[sIndex + 1], box, box, data[0] * SQ, data[1] * SQ, SQ, SQ);
-          ctx.drawImage(mino, tetr.sprite[sIndex], tetr.sprite[sIndex + 1], box, box, data[2] * SQ, data[3] * SQ, SQ, SQ);
-          ctx.drawImage(mino, tetr.sprite[sIndex], tetr.sprite[sIndex + 1], box, box, data[4] * SQ, data[5] * SQ, SQ, SQ);
-          ctx.drawImage(mino, tetr.sprite[sIndex], tetr.sprite[sIndex + 1], box, box, data[6] * SQ, data[7] * SQ, SQ, SQ);
+          ctx.drawImage(mino, tetr.sprite[sIndex], tetr.sprite[sIndex + 1], box, box, data[0] * blockSize, data[1] * blockSize, blockSize, blockSize);
+          ctx.drawImage(mino, tetr.sprite[sIndex], tetr.sprite[sIndex + 1], box, box, data[2] * blockSize, data[3] * blockSize, blockSize, blockSize);
+          ctx.drawImage(mino, tetr.sprite[sIndex], tetr.sprite[sIndex + 1], box, box, data[4] * blockSize, data[5] * blockSize, blockSize, blockSize);
+          ctx.drawImage(mino, tetr.sprite[sIndex], tetr.sprite[sIndex + 1], box, box, data[6] * blockSize, data[7] * blockSize, blockSize, blockSize);
         }
       } else {
         if(ctx == holdCanvas.getContext("2d") && !tetr.firstHold) 
           ctx.fillStyle = "#808080";
         else ctx.fillStyle = tetr.color[index];
      
-        ctx.fillRect(data[0] * SQ, data[1] * SQ, SQ, SQ);
-        ctx.fillRect(data[2] * SQ, data[3] * SQ, SQ, SQ);
-        ctx.fillRect(data[4] * SQ, data[5] * SQ, SQ, SQ);
-        ctx.fillRect(data[6] * SQ, data[7] * SQ, SQ, SQ);
+        ctx.fillRect(data[0] * blockSize, data[1] * blockSize, blockSize, blockSize);
+        ctx.fillRect(data[2] * blockSize, data[3] * blockSize, blockSize, blockSize);
+        ctx.fillRect(data[4] * blockSize, data[5] * blockSize, blockSize, blockSize);
+        ctx.fillRect(data[6] * blockSize, data[7] * blockSize, blockSize, blockSize);
       }
     }
   },
@@ -104,11 +100,26 @@ addition.animation.countdown(0);
 
 const config = document.getElementById("config-nav");
 const cLevel = config.children[0];
+const level = [null, 200, 100, 50, 0];
+const hardnessInput = document.querySelector('.hardness-input');
+const tooltip = document.querySelector('.tooltip');
 
-// Leveling
-const cLevelInput = cLevel.querySelectorAll("input");
-cLevelInput[cLevelInput.length - 1].value = 0;
+const levelDivs = document.querySelectorAll('.config-level div');
 
+for (let index = 0; index < 5; index++) {
+  const div = levelDivs[index];
+  div.addEventListener('click', () => {
+    const radioButton = div.querySelector('input[type="radio"]');
+    radioButton.checked = true;
+    tetr.levelReset(level[index]);
+  });
+}
 
-
-
+hardnessInput.addEventListener('input', function() {
+  const hardness = parseInt(this.value);
+  
+  const intervalDuration = (20 - hardness) * 10;
+  tetr.levelReset(intervalDuration);
+  const existingMessage = 'Higher Means Harder<br/>';
+  tooltip.innerHTML = `${existingMessage}Static Gravity: ${hardness}`;
+});
