@@ -11,10 +11,11 @@
 :root {
   --ff-1 : HUN;
   --ff-2 : 'Roboto', sans-serif;
+  --block-size: 30px;
 }
 
 body {
-  background-color: black;
+  background-color: gray;
   display: grid;
   place-items: center;
   height: 100vh;
@@ -64,26 +65,28 @@ body {
 
 .board-container {
   display: flex;
-  height: 838px;
-  width : 384px;
+  height: calc(var(--block-size) * 22);
+  width : calc(var(--block-size) * 10 + 20);
 }
 
 .board-line {
-  width: 3px;
-  height: 762px;
+  width: 2.5px;
+  height: calc(var(--block-size) * 20);
   background-color: rgb(180, 180, 180);
   position: relative;
-  top: 76px;
+  top: calc(var(--block-size) * 2);
 }
 
 .look-over-container {
   display: flex;
   flex-direction: column;
+  margin-top : calc(var(--block-size) * 2);
 }
 
 .hold-container .title {
   text-align: right;
   border-right: 2px rgb(180, 180, 180) solid;
+  margin-top : calc(var(--block-size) * 2);
 }
 
 .look-over-container .title{
@@ -109,10 +112,10 @@ body {
 .title {
   color: white;
   font-weight: 700;
-  font-size: 1.75rem;
+  font-size: 1.4rem;
   letter-spacing: 0.15em;
-  border: 4.5px rgb(180, 180, 180) solid;
-  padding: 0.5rem 2rem;
+  border: 3.5px rgb(180, 180, 180) solid;
+  padding: 0.5rem 2rem 0.3rem 2rem;
 }
 
 #fps-bar {
@@ -161,16 +164,28 @@ body {
 /* config nav */
 
 #config-nav {
-  padding: 2rem 0.5rem;
+  user-select: none;
+  padding: 1.5rem 0 0 1.5rem;
   position: fixed;
   display: flex;
-  right: -25rem;
+  top: 0;
+  right: -23rem;
   height: calc(100% - 2rem);
-  width: 25rem;
+  width: 23rem;
   background-color: #000A;
-  transition: 0.2s ease-in-out;
+  transition: 0.5s ease-in-out;
   color: white;
-  right: 0rem;
+}
+
+#config-nav::before {
+  background-color: #000A;
+  border-radius: 0 0 0 0.4em;
+  position: absolute;
+  font-size: 2.5rem;
+  padding: 1rem 1.5rem 0.5rem 2rem;
+  top: 0;
+  left: -134.54px;
+  content: "ZEN";
 }
 
 #config-nav > * {
@@ -181,6 +196,7 @@ body {
 
 #config-nav:hover {
   right: 0rem;
+  transition: 0.23s ease-in-out;
 }
 
 #config-nav:hover#config-nav > * {
@@ -190,19 +206,23 @@ body {
 .config-level input[type="radio"] {
   width: 1.2rem;
   height: 1.2rem;
-  cursor: pointer;
+  position: relative;
+  top: -0.2rem;
+  margin-right: 0.75rem;
 }
 
-.config-level input[type="number"] {
-  height: 1.5rem;
-  width: 10rem;
-  padding-left: 0.5rem;
-  font-size: 1.1rem;
+.config-level input[type="range"] {
+  position: relative;
+  top: -0.2rem;
+  margin-left: 1rem;
 }
 
 .config-level > div {
-  margin-top : 0.5rem;
+  cursor: pointer;
+  margin-top : 0.7rem;
   font-size: 1.35rem;
+  display: flex;
+  align-items: center;
 }
 
 .config-level>*:last-child {
@@ -211,4 +231,31 @@ body {
 
 .config-level > h3 {
   font-size: 2.5rem;
+}
+
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip {
+  visibility: hidden;
+  width: max-content;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 0.3em;
+  padding: 0.5em 0.5em 0.2em 0.5em;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip-container:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
 }
