@@ -14,6 +14,7 @@
 <body>
 
   <div id="bg-darken"></div>
+  <canvas id="background"></canvas>
 
   <div class="tetr">
     <div class="hold-container">
@@ -23,7 +24,6 @@
     <div class="board-container">
       <div class="board-line bl1"></div>
       <canvas id="board" height="836" width="380"></canvas> 
-      <!-- height="836" width="380"  -->
       <div class="board-line bl2"></div>
     </div>
     <div class="look-over-container">
@@ -60,6 +60,89 @@
   </div>
   
   <div id="fps-bar"></div>
+
+
+
+  <script type="x-shader/x-fragment" id="vertShader">
+    precision mediump float;
+
+    varying vec2 vUv;
+    attribute vec2 a_position;
+
+    void main() {
+        vUv = .5 * (a_position + 1.);
+        gl_Position = vec4(a_position, 0.0, 1.0);
+    }
+</script>
+
+
+<script type="x-shader/x-fragment" id="fragShader">
+    precision mediump float;
+
+    varying vec2 vUv;
+    uniform float u_scale;
+    uniform float u_time;
+    uniform float u_ratio;
+    uniform float u_color;
+    uniform vec2 u_pointer;
+
+    #define TWO_PI 6.28318530718
+    #define PI 3.14159265358979323846
+
+    float rand(vec2 n) {
+        return fract(cos(dot(n, vec2(12.9898, 4.1414))) * 43758.5453);
+    }
+
+    vec2 random2(vec2 p) {
+        return fract(sin(vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3))))*43758.5453);
+    }
+    
+    vec3 get_voronoi_shape(vec2 _uv, float scale, float time, vec2 point) {
+        vec2 uv = scale * _uv;
+        vec2 i_uv = floor(uv);
+        vec2 f_uv = fract(uv);
+
+        vec3 color = vec3(0.);
+        float warmth = (1. - u_color);
+        float randomizer = .2 + .8 * rand(i_uv);
+
+        color.r += pow(randomizer, .1) - .9 * warmth;
+        color.g += .6 * randomizer + .2 * pow(warmth, 4.);
+        color.b += .2 * randomizer + .3 * warmth;
+
+        float dot = 1. - length((i_uv + .5) / scale - point);
+		  dot = clamp(dot, 0., 1.);
+        color.r += .5 * pow(dot, 4.);
+        color.b += .6 * pow(dot, 6.);
+
+        randomizer = 1. - randomizer;
+
+        float shape = 0.;
+        for (int y = -1; y <= 1; y++) {
+            for (int x = -1; x <= 1; x++) {
+                vec2 tile_offset = vec2(float(x), float(y));
+                vec2 cell_center = .5 + .5 * sin(time + PI * 2. * random2(i_uv + tile_offset));
+                float dist = length(tile_offset + cell_center - f_uv);
+                shape += .05 * dist;
+            }
+        }
+        shape = 10. * pow(shape, 6.);
+
+        return shape * color;
+    }
+
+    void main() {
+        vec2 point = u_pointer;
+        point.x *= u_ratio;
+
+        vec2 uv = vUv;
+        uv.x *= u_ratio;
+
+        vec3 res = get_voronoi_shape(uv, u_scale, .001 * u_time, point);
+
+        gl_FragColor = vec4(res, 1.);
+    }
+</script>
 
   <script src="js/initialize.js"></script>
   <script src="js/index.js"></script>
