@@ -22,7 +22,8 @@
     </div>
     <div class="board-container">
       <div class="board-line bl1"></div>
-      <canvas id="board" height="836" width="380"></canvas>
+      <canvas id="board" height="836" width="380"></canvas> 
+      <!-- height="836" width="380"  -->
       <div class="board-line bl2"></div>
     </div>
     <div class="look-over-container">
@@ -43,15 +44,18 @@
     </div>
   </div>
   
-  <div id="config-nav" style="display: none;">
+  <div id="config-nav">
     <div class="config-level">
       <h3>LEVEL</h3>
-      <div><input type="radio" name="level" checked/> CLOSED</div>
-      <div><input type="radio" name="level"/> EASY</div>
+      <div><input type="radio" name="level"/> CLOSED</div>
+      <div><input type="radio" name="level" checked/> EASY</div>
       <div><input type="radio" name="level"/> MEDIUM</div>
       <div><input type="radio" name="level"/> HARD</div>
       <div><input type="radio" name="level"/> IMPOSSIBLE</div>
-      <div>STATIC GRAVITY <input type="number"></div>
+      <div class="tooltip-container">
+        STATIC GRAVITY <input type="range" min="0" max="20" value="0" class="hardness-input"/>
+        <div class="tooltip">Higher Means Harder<br/></div>
+      </div>
     </div>
   </div>
   
