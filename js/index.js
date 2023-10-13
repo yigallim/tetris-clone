@@ -459,20 +459,34 @@ const tetr = {
     addition.refresh();
 
     setInterval(() => {
-      this.control.softDrop();
-    }, 50);
-
-    setInterval(() => {
       this.touchBottom();
       this.lockPiece();
     }, 5);
+
+    globalInit();
   },
 
   shadowY() {
     for(let i = 0; i < ROW - 2; i++) {
       if(this.collide(0, i)) return i - 1;
     }
-  }
+  },
+
+  levelReset : (function() {
+    let intervalId; 
+  
+    return function(intervalDuration) {
+      if (intervalDuration === null) {
+        clearInterval(intervalId);
+        return;
+      }
+  
+      clearInterval(intervalId);
+      intervalId = setInterval(() => {
+        tetr.control.softDrop();
+      }, intervalDuration);
+    };
+  })()
 }
 
 let keyUnit = {
