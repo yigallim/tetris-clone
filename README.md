@@ -18,3 +18,9 @@ ROTATE CCW : RIGHT ARROW<br/>
 HOLD PIECE : LEFT SHIFT<br/>
 
 Refresh page to restart.
+
+## Credits
+
+This project includes assets from the official Tetr.io game, used for educational and non-commercial purposes. The original assets are the property of their respective owners.
+
+- Tetris assets: © [Tetr.io](https://tetr.io/)
