@@ -15,7 +15,7 @@
 }
 
 body {
-  background-color: gray;
+  background-color: black;
   display: grid;
   place-items: center;
   height: 100vh;
@@ -29,28 +29,30 @@ body {
   z-index: -1;
 }
 
-#bg-video {
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  object-fit: cover;
-  z-index: -2;
-}
 
 #bg-darken {
   height: 100%;
   width: 100%;
   position: fixed;
-  background-color: rgba(0, 0, 0, 0.5);
   animation: bg-darken 9s infinite;
   transition: all 3s;
   z-index: -2;
+  overflow: hidden;
+}
+
+#background {
+  z-index: -5;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
 }
 
 @keyframes bg-darken {
-  0%   {background-color: rgba(0, 0, 0, 0.65);}
-  50%  {background-color: rgba(0, 0, 0, 0.8);}
-  100% {background-color: rgba(0, 0, 0, 0.65);}
+  0%   {background-color: rgba(0, 0, 0, 0.3);}
+  50%  {background-color: rgba(0, 0, 0, 0.5);}
+  100% {background-color: rgba(0, 0, 0, 0.3);}
 }
 
 #board {
