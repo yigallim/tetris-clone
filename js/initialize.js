@@ -133,7 +133,6 @@ function updateWarmth() {
     params.warmth += (Math.random() * 0.05 - 0.05 / 2); 
     params.warmth = Math.max(0.2, Math.min(0.6, params.warmth)); 
     gl.uniform1f(uniforms.u_color, params.warmth);
-    console.log(params.warmth);
 }
 
 setInterval(updateWarmth, 500);
