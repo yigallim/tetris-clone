@@ -2,7 +2,8 @@ const canvas = document.getElementById("board");
 const ctx = canvas.getContext("2d");
 const ROW = 24;
 const COL = 14;
-let SQ = canvas.height / 22;
+const SQ = canvas.height / 22;
+const blockSize = 30;
 let _block = [];
 
 for (let y = 0; y < ROW; y++) {
@@ -30,5 +31,8 @@ const spriteLength = 256;
 const box = (256 - 16) / 5;
 mino.src = "assets/tetromino.png"
 
-document.body.style.transform = "scale(0.8)";
-document.body.style.transformOrigin = "40% 30%";
+function globalInit() {
+  setTimeout(() => {
+    tetr.levelReset(200);
+  }, 1000)
+}
