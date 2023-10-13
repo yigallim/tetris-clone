@@ -16,8 +16,7 @@ ROTATE CW  : LEFT ARROW<br/>
 ROTATE CCW : RIGHT ARROW<br/>
 180 ROTATE : DOWN ARROW<br/>
 HOLD PIECE : LEFT SHIFT<br/>
-
-Refresh page to restart.
+Refresh page to restart.<br/>
 
 ## Credits
 
